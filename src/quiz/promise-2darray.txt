@@ -1,1 +1,10 @@
 Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+
+Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+
+- Sum called is logged when sum2DArray is called.
+- returning from sum is logged right after the promise is created.
+- If array is empty, error msg 'Cannot sum an empty array' is logged.
+- If the array is not empty, 'Adding to sum' is logged for each element in the array.
+- 'Sum is: ' is logged with the sum.
+- setTimeout with a 0 delay ensures the summing happens asynchronously, with logs appearing before summing start.

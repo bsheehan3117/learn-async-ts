@@ -9,40 +9,27 @@ const aliceTiming1: KeyframeEffectOptions = {
   fill: 'forwards'
 };
 
-const alice10 = document.querySelector<HTMLElement>("#alice1");
-const alice20 = document.querySelector<HTMLElement>("#alice2");
-const alice30 = document.querySelector<HTMLElement>("#alice3");
+async function animateSequentially() {
+  const alice1 = document.querySelector<HTMLElement>("#alice1");
+  const alice2 = document.querySelector<HTMLElement>("#alice2");
+  const alice3 = document.querySelector<HTMLElement>("#alice3");
 
-if(alice10 && alice20 && alice30) {
-  // Promise chain  
-  alice10.animate(aliceTumbling1, aliceTiming1).finished  
-    .then(() => {
-        return alice20
-                .animate(aliceTumbling1, aliceTiming1)
-                .finished;     
-    })
-    .then(() => {
-      return alice30
-              .animate(aliceTumbling1, aliceTiming1)
-              .finished;
-    })
-    .catch((err) => alert(`Error when promising ... ${err.message}`));
-}
-else{
-  console.warn("#alice not found");
+  if (!alice1 || !alice2 || !alice3) {
+      console.warn("#alice not found");
+      return;
+  }
+
+  try {
+      await alice1.animate(aliceTumbling1, aliceTiming1).finished;
+      await alice2.animate(aliceTumbling1, aliceTiming1).finished;
+      await alice3.animate(aliceTumbling1, aliceTiming1).finished;
+  } catch (err) {
+      if (err instanceof Error) {
+          console.log(`Error when animating: ${err.message}`);
+      } else {
+          console.log('Unknown error occurred');
+      }
+  }
 }
 
-// alice10
-//     .animate(aliceTumbling1, aliceTiming1)
-//     .finished
-//     .then((res) => {
-//         console.log(res);
-//         alice20
-//             .animate(aliceTumbling1, aliceTiming1)
-//             .finished
-//             .then((res) => {
-//                 console.log(res);
-//                 alice30.animate(aliceTumbling1, aliceTiming1);
-//             })
-//     });
-  
+animateSequentially();
